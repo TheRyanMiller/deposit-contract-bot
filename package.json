@@ -1,0 +1,19 @@
+{
+  "name": "deposit-contract-bot",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.21.0",
+    "comma-number": "^2.0.1",
+    "dotenv": "^8.2.0",
+    "node-cron": "^2.0.3",
+    "twitter": "^1.7.1",
+    "web3": "^1.3.0"
+  }
+}
