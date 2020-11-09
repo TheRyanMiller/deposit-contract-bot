@@ -7,22 +7,22 @@
     {
         "date":"11/09",
         "morning":false,
-        "fact":"Here is a test fact, on the afternoon of 11/9"
+        "fact":"Staking on Ethereum 2.0 delivers a nice reward rate. But be aware that the interest is *not* compounding. It is earned against a maximum effective balance of 32.\nMore here: https://www.attestant.io/posts/understanding-validator-effective-balance/"
     },
     {
         "date":"11/10",
         "morning":true,
-        "fact":""
+        "fact":"Wonder why the deposit contract balance isn't necessarily divisble by 32?\nDeposits do not need to equal 32 exactly. Validators may deposit less (e.g. 1 ETH ) to reserve a validator index, or top-off existing validators which have been penalized."
     },
     {
         "date":"11/10",
         "morning":false,
-        "fact":""
+        "fact":"With a total of 13,888 ETH, the top depositer to the deposit contract is 0xbb84d966c09264ce9a2104a4a20bb378369986db.\nCheck out @DuneAnalytics dashboard for more desposit contract stats. https://www.duneanalytics.com/hagaetc/eth2-0-deposits"
     },
     {
         "date":"11/11",
         "morning":true,
-        "fact":""
+        "fact":"Staking on Ethereum 2.0 delivers a nice reward rate. But be aware that the interest is *not* compounding. It is earned against a maximum effective balance of 32.\nMore: https://www.attestant.io/posts/understanding-validator-effective-balance/"
     },
     {
         "date":"11/11",

@@ -1,10 +1,11 @@
 const Twitter = require('twitter');
 const facts = require('./eth2_facts');
 const moment = require('moment');
+const lc = require('letter-count');
 require('dotenv').config();
 
 
-let header = "==== BONUS ETH 2 FACT ==== \n";
+let header = "==== BONUS ETH 2 FACT ==== \n\n";
 let fact = "";
 
 const findFact = () => {
@@ -21,7 +22,9 @@ const findFact = () => {
 }
 
 findFact();
-console.log(header, fact);
+let message = header+fact;
+console.log(message);
+console.log("\nCharacter count: "+ lc.count(message, '-c').chars)
 
 
 let client = new Twitter({
