@@ -69,22 +69,22 @@ function repeat(s, i) {
 }
 
 console.log("Starting bot...");
-    axios.get(url).then(resp => {
-        contractBalance = (Number(web3.utils.fromWei(resp.data.result)) - 5).toFixed(0);
-        let remainder = contractBalance % 32;
-        balance = contractBalance - remainder;
-        numValidators = balance / 32;
-        percentage = (balance/minEthNeeded*100).toFixed(1);
-        requiredEth = minEthNeeded - balance;
-        console.log(balance, numValidators);
-        statusBar=make_bar(percentage, bar_styles[8], min_size, max_size).str + " " + percentage +"%";
-        status = commaNumber(balance)+" ETH has been staked in the Eth2 deposit contract. \n \n"+commaNumber(requiredEth)+" more ETH is needed to launch Eth2. \n \n"+statusBar;
-        client.post('statuses/update', {status},  function(error, tweet, response) {
-            if(error) console.log(error);
-            else{
-                //console.log(tweet);  // Tweet body.
-                //console.log(response);  // Raw response object.
-                console.log("Tweet successful.")
-            }
-        });
-    })
+axios.get(url).then(resp => {
+    contractBalance = (Number(web3.utils.fromWei(resp.data.result)) - 5).toFixed(0);
+    let remainder = contractBalance % 32;
+    balance = contractBalance - remainder;
+    numValidators = balance / 32;
+    percentage = (balance/minEthNeeded*100).toFixed(1);
+    requiredEth = minEthNeeded - balance;
+    statusBar=make_bar(percentage, bar_styles[8], min_size, max_size).str + " " + percentage +"%";
+    status = commaNumber(balance)+" ETH has been staked in the Eth2 deposit contract. \n \n"+commaNumber(requiredEth)+" more ETH is needed to launch Eth2. \n \n"+statusBar;
+    console.log(status);
+    // client.post('statuses/update', {status},  function(error, tweet, response) {
+    //     if(error) console.log(error);
+    //     else{
+    //         //console.log(tweet);  // Tweet body.
+    //         //console.log(response);  // Raw response object.
+    //         console.log("Tweet successful.")
+    //     }
+    // });
+})
