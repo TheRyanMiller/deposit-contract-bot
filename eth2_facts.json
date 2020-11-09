@@ -7,7 +7,7 @@
     {
         "date":"11/09",
         "morning":false,
-        "fact":"Staking on Ethereum 2.0 delivers a nice reward rate. But be aware that the interest is *not* compounding. It is earned against a maximum effective balance of 32.\nMore here: https://www.attestant.io/posts/understanding-validator-effective-balance/"
+        "fact":"If you don't have 32 ETH, don't worry. Check out @Rocket_Pool which offers a decentralized staking for users who have > 0.1 ETH.\n\nThose who choose to be a Rocket Pool node operator earn commisions on top of their staking rewards 🤑."
     },
     {
         "date":"11/10",
@@ -27,12 +27,12 @@
     {
         "date":"11/11",
         "morning":false,
-        "fact":""
+        "fact":"Be careful! It's possible to generate an Eth2 deposit that is accepted by the deposit contract but rejected by the beacon chain. This means total deposit loss! 😱 \n\n@paulhauner's thread here: https://twitter.com/paulhauner/status/1324211564145094657"
     },
     {
         "date":"11/12",
         "morning":true,
-        "fact":""
+        "fact":"If you don't have 32 ETH, don't worry. Check out @Rocket_Pool which offers a decentralized staking for users who have > 0.1 ETH.\n\nThose who choose to be a Rocket Pool node operator earn commisions on top of their staking rewards 🤑."
     },
     {
         "date":"11/12",
