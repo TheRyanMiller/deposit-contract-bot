@@ -77,7 +77,7 @@ axios.get(url).then(resp => {
     percentage = (balance/minEthNeeded*100).toFixed(1);
     requiredEth = minEthNeeded - balance;
     statusBar=make_bar(percentage, bar_styles[8], min_size, max_size).str + " " + percentage +"%";
-    status = commaNumber(balance)+" ETH has been staked in the Eth2 deposit contract. \n \n"+commaNumber(requiredEth)+" more ETH is needed to launch Eth2. \n \n"+statusBar;
+    status = commaNumber(balance)+" ETH has been staked in the Eth2 deposit contract. \n \n"+commaNumber(requiredEth)+" more ETH is needed to launch #Eth2. #Ethereum \n \n"+statusBar;
     console.log(status);
     // client.post('statuses/update', {status},  function(error, tweet, response) {
     //     if(error) console.log(error);
