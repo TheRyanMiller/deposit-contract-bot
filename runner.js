@@ -51,7 +51,7 @@ let postTask = cron.schedule(cronValue, () => {
                 console.log("NEGATIVE TREND!!!!");
             }
             if(dbResult.trend<result.trend) console.log("POSITIVE TREND!!!!")
-            differencesTweet+=commaNumber(result.trend)+" ETH daily trend is needed for Decmeber 1st genesis.";
+            differencesTweet+=commaNumber(result.trend)+" ETH daily trend is needed for December 1st genesis.";
             console.log(differencesTweet)
             console.log("\nCharacter count: "+ lc.count(differencesTweet, '-c').chars)
             console.log();
