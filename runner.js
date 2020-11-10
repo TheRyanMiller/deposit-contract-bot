@@ -74,15 +74,17 @@ let postTask = cron.schedule(cronValue, () => {
                         if(error) console.log(error);
                         else{
                             console.log("Tweet 2 successful.");
-                            client2.post('statuses/update', {
-                                status:"@EthDeposit "+factsTweet,
-                                in_reply_to_status_id: ""+tweet2.id_str
-                            },function(error, tweet, response) {
-                                if(error) console.log(error);
-                                else{
-                                    console.log("Tweet 3 successful.");
-                                }
-                            })
+                            if(factsTweet!=""){
+                                client2.post('statuses/update', {
+                                    status:"@EthDeposit "+factsTweet,
+                                    in_reply_to_status_id: ""+tweet2.id_str
+                                },function(error, tweet, response) {
+                                    if(error) console.log(error);
+                                    else{
+                                        console.log("Tweet 3 successful.");
+                                    }
+                                })
+                            }
                         }
                     })
                 }

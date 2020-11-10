@@ -13,16 +13,17 @@ module.exports = () => {
         let isMorning = moment().format("HH") < 12;
         facts.forEach(item => {
             if(today==item.date) {
-                if(isMorning==item.morning){
-                    fact = item.fact;
+                //if(isMorning==item.morning){
+                    if(!!item.fact && item.fact!="") fact = item.fact;
                     return;
-                }
+                //}
             }
         })
         
     }
 
     findFact();
+    if(fact==="" || !fact) return "";
     let message = header+fact;
 
     console.log("\nCharacter count: "+ lc.count(message, '-c').chars)
