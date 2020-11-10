@@ -25,7 +25,7 @@ let client2 = new Twitter({
 
 console.log("Starting bot...\n\n");
 
-let cronValue = "0 0,12 * * *";
+let cronValue = "36 0,11,12 * * *";
 
 let postTask = cron.schedule(cronValue, () => {
     database.values.findOne({}).sort({created_at:-1}).then(dbResult=>{
