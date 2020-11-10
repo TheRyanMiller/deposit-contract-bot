@@ -4,36 +4,31 @@ const moment = require('moment');
 const lc = require('letter-count');
 require('dotenv').config();
 
+module.exports = () => {
+    let header = "==== BONUS ETH 2 FACT ==== \n\n";
+    let fact = "";
 
-let header = "==== BONUS ETH 2 FACT ==== \n\n";
-let fact = "";
-
-const findFact = () => {
-    let today = moment().format('MM/DD');
-    let isMorning = moment().format("HH") < 12;
-    facts.forEach(item => {
-        if(today==item.date) {
-            if(isMorning==item.morning){
-                fact=item.fact;
+    const findFact = () => {
+        let today = moment().format('MM/DD');
+        let isMorning = moment().format("HH") < 12;
+        facts.forEach(item => {
+            if(today==item.date) {
+                if(isMorning==item.morning){
+                    fact = item.fact;
+                    return;
+                }
             }
-        }
-    })
-    
+        })
+        
+    }
+
+    findFact();
+    let message = header+fact;
+
+    console.log("\nCharacter count: "+ lc.count(message, '-c').chars)
+
+    return message;
 }
-
-findFact();
-let message = header+fact;
-console.log(message);
-console.log("\nCharacter count: "+ lc.count(message, '-c').chars)
-
-
-let client = new Twitter({
-    consumer_key: process.env.TWITTER_CONSUMER_KEY,
-    consumer_secret: process.env.TWITTER_CONSUMER_SECRET,
-    access_token_key: process.env.TWITTER_ACCESS_TOKEN_KEY,
-    access_token_secret: process.env.TWITTER_ACCESS_TOKEN_SECRET
-});
-
 
 // client.post('statuses/update', {status},  function(error, tweet, response) {
 //     if(error) console.log(error);

@@ -7,7 +7,7 @@
     {
         "date":"11/09",
         "morning":false,
-        "fact":"If you don't have 32 ETH, don't worry. Check out @Rocket_Pool which offers a decentralized staking for users who have > 0.1 ETH.\n\nThose who choose to be a Rocket Pool node operator earn commisions on top of their staking rewards 🤑."
+        "fact":"As we prepare to stake on mainnet, expect that the final versions of beacon chain software (all clients) likely won't be ready until after Nov. 24.\nIn meantime, sync geth, secure your system, but wait to install the client. \n\n-- @superphiz"
     },
     {
         "date":"11/10",
@@ -37,17 +37,17 @@
     {
         "date":"11/12",
         "morning":false,
-        "fact":""
+        "fact":"To trigger genesis, there must be at least 16384 32-ETH validator deposits.\n\nThis is an important distinction from the 524,288 ETH threshold (16,384 * 32) that is commonly discussed. It is possible to have more than 524,288 ETH in the deposit contract and genesis still not triggered."
     },
     {
         "date":"11/13",
         "morning":true,
-        "fact":""
+        "fact":"To trigger genesis, there must 16384 validator deposits of 32 ETH.\n\nThis is a distinction from the commonly asserted 524,288 ETH (16,384 * 32) threshold. It's technically possible to have > 524,288 ETH deposited and still meet genesis conditions."
     },
     {
         "date":"11/13",
         "morning":false,
-        "fact":""
+        "fact":"As we prepare to stake on mainnet, expect that the final versions of beacon chain software (all clients) likely won't be ready until after Nov. 24.\nIn meantime, sync geth, secure your system, but wait to install the client. \n\n-- @superphiz"
     },
     {
         "date":"11/14",
