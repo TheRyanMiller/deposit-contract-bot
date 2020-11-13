@@ -68,6 +68,8 @@ module.exports = () => new Promise ((resolve, reject) => {
     }
 
     let payload;
+
+
     axios.get(url).then(resp => {
         balance = (Number(web3.utils.fromWei(resp.data.result)) - 5).toFixed(0);
         numValidators = (balance / 32).toFixed(0);

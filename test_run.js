@@ -15,6 +15,7 @@ database.values.findOne({}).sort({created_at:-1}).then(dbResult=>{
         // Prepare differences tweet
         console.log("-----MAIN TWEET----\n")
         console.log(result.status+"\n\n");
+        console.log("\nCharacter count: "+ lc.count(result.status, '-c').chars)
 
         console.log("-----PREPARE DIFFERENCES TWEET----")
         let differencesTweet = "";
@@ -28,7 +29,7 @@ database.values.findOne({}).sort({created_at:-1}).then(dbResult=>{
         if(dbResult.trend<result.trend) console.log("POSITIVE TREND!!!!")
         differencesTweet+=commaNumber(result.trend)+" ETH daily trend is needed for December 1st genesis.";
         console.log(differencesTweet)
-        console.log("\nCharacter count: "+ lc.count(differencesTweet, '-c').chars)
+        console.log("\nCharacter count: "+ lc.count(differencesTweet, '-c').chars);
         console.log();
 
         console.log();

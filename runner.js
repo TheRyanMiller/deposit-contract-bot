@@ -2,6 +2,8 @@ const Twitter = require('twitter');
 const cron = require('node-cron');
 const database = require('./dbSchemas');
 const buildTweet = require('./build_tweet');
+const buildDiffTweet = require('./build_diff_tweet');
+const moment = require('moment');
 const tweet_fact = require('./tweet_fact');
 const commaNumber = require('comma-number');
 const lc = require('letter-count');
@@ -25,70 +27,87 @@ let client2 = new Twitter({
 
 console.log("Starting bot...\n\n");
 
-let cronValue = "0 20 * * *";
+let cronValue = "0 8,20 * * *";
+let isProd = true;
+let sendOn = true;
+let mainAccount = process.env.TEST_ACCT;
+if(isProd) mainAccount = process.env.PROD_ACCT;
 
-let postTask = cron.schedule(cronValue, () => {
-    database.values.findOne({}).sort({created_at:-1}).then(dbResult=>{
+let replyAccount = process.env.REPLY_ACCT;
+
+let run = () => {
+    let d = moment().subtract({hours:20});
+    database.values.findOne({created_at: {$lt: d}}).sort({created_at:-1}).then(dbResult=>{
+        console.log("~~~~~~\n"+dbResult+"\n~~~~~~~")
         buildTweet().then(result=>{
+            
+            if(isProd){
+                // Save new result
+                let newValues = new database.values({
+                    percent: result.percent.replace(/,/g, ""),
+                    balance: result.balance.replace(/,/g, ""),
+                    trend: result.trend,
+                    created_at: new Date()
+                });
+                newValues.save( err => { if(err) throw err } )
+            }
 
-            // Save new result
-            let newValues = new database.values({
-                percent: result.percent.replace(/,/g, ""),
-                balance: result.balance.replace(/,/g, ""),
-                trend: result.trend,
-                created_at: new Date()
-            });
-            newValues.save( err => { if(err) throw err } )
+            // Main Tweet
+            console.log("\n-----MAIN TWEET----")
+            console.log(result.status+"\n")
+            console.log("\n->Character count: "+ lc.count(result.status, '-c').chars);
 
             // Prepare differences tweet
-            console.log("-----PREPARE DIFFERENCES TWEET----")
-            let differencesTweet = "";
-            let percentGain = (result.percent - dbResult.percent).toFixed(1);
-            let stakeGain = commaNumber((result.balance - dbResult.balance).toFixed(0));
-            differencesTweet=commaNumber(stakeGain)+" ETH staked since last tweet.\n\n";
-            differencesTweet+=percentGain+"% gain toward genesis since last tweet.\n\n";
-            if(dbResult.trend>result.trend){
-                console.log("NEGATIVE TREND!!!!");
-            }
-            if(dbResult.trend<result.trend) console.log("POSITIVE TREND!!!!")
-            differencesTweet+=commaNumber(result.trend)+" ETH daily trend is needed for December 1st genesis.";
-            console.log(differencesTweet)
-            console.log("\nCharacter count: "+ lc.count(differencesTweet, '-c').chars)
-            console.log();
-
-            console.log();
+            console.log("\n-----PREPARE DIFFERENCES TWEET----")
+            let differencesTweet = buildDiffTweet(result,dbResult);
+            console.log(differencesTweet);
+            console.log("\n->Character count: "+ lc.count(differencesTweet, '-c').chars);
+            
             // Prepare Facts Tweet
-            console.log("-----PREPARE FACTS----")
+            console.log("\n-----FACTS TWEET----")
             let factsTweet = tweet_fact();
+            console.log(factsTweet)
+            console.log("\n->Character count: "+ lc.count(factsTweet, '-c').chars);
 
-            client.post('statuses/update', {status:result.status},  function(error, tweet, response) {
-                if(error) console.log(error.response);
-                else{
-                    //console.log(tweet);  // Tweet body.
-                    //console.log(response);  // Raw response object.
-                    console.log("Tweet 1 successful.");
-                    client2.post('statuses/update', {
-                        status:"@DepositEth "+differencesTweet,
-                        in_reply_to_status_id: ""+tweet.id_str
-                    },function(error, tweet2, response) {
-                        if(error) console.log(error);
-                        else{
-                            console.log("Tweet 2 successful.");
-                            if(factsTweet!=""){
-                                client2.post('statuses/update', {
-                                    status:"@EthDeposit "+factsTweet,
-                                    in_reply_to_status_id: ""+tweet2.id_str
-                                },function(error, tweet, response) {
-                                    if(error) console.log(error);
-                                    else{
-                                        console.log("Tweet 3 successful.");
-                                    }
-                                })
+            if(sendOn){
+                client.post('statuses/update', {status:result.status},  function(error, tweet, response) {
+                    if(error) console.log(error.response);
+                    else{
+                        //console.log(tweet);  // Tweet body.
+                        //console.log(response);  // Raw response object.
+                        console.log("Tweet 1 successful.");
+                        client2.post('statuses/update', {
+                            status:mainAccount+" "+differencesTweet,
+                            in_reply_to_status_id: ""+tweet.id_str
+                        },function(error, tweet2, response) {
+                            if(error) console.log(error);
+                            else{
+                                console.log("Tweet 2 successful.");
+                                if(factsTweet!=""){
+                                    client2.post('statuses/update', {
+                                        status:replyAccount+" "+factsTweet,
+                                        in_reply_to_status_id: ""+tweet2.id_str
+                                    },function(error, tweet, response) {
+                                        if(error) console.log(error);
+                                        else{                                  
+                                            console.log("Tweet 3 successful.");
+                                        }
+                                    })
+                                }
                             }
-                        }
-                    })
-                }
-            });
+                        })
+                    }
+                });
+            }
         })
     })
-})
+}
+
+if(isProd){
+    let postTask = cron.schedule(cronValue, () => {
+        run();
+    })
+}
+else{
+    run();
+}
