@@ -58,7 +58,6 @@ function repeat(s, i) {
 const buildTimeMeter = () => {
     let contractDeployDate = moment('2020-11-04' + 'T' + '15:15:20' + 'Z').utc();
     let eth2LaunchDate = moment('2020-11-24' + 'T' + '23:59:59' + 'Z').utc();
-    //eth2LaunchDate = moment('2020-11-20' + 'T' + '23:59:59' + 'Z').utc();
     let totalMinutes = eth2LaunchDate.diff(contractDeployDate,'minutes');
     let minutesUntilLaunch = eth2LaunchDate.diff(moment().utc(),'minutes');
     let minutesElapsed = totalMinutes-minutesUntilLaunch;
@@ -71,8 +70,8 @@ module.exports = (result,dbResult) => {
     let differencesTweet = "";
     let percentGain = (result.percent - dbResult.percent).toFixed(1);
     let stakeGain = commaNumber((result.balance - dbResult.balance).toFixed(0));
-    differencesTweet=commaNumber(stakeGain)+" ETH staked in past 24hrs.\n\n";
-    differencesTweet+=percentGain+"% gain toward genesis in past 24hrs.\n\n";
+    differencesTweet=commaNumber(stakeGain)+" ETH staked in past 24 hours.\n\n";
+    differencesTweet+=percentGain+"% gain toward genesis in past 24 hours.\n\n";
     if(dbResult.trend>result.trend){
         console.log("NEGATIVE TREND!!!!");
     }

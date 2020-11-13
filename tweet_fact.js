@@ -27,12 +27,3 @@ module.exports = () => {
     let message = header+fact;
     return message;
 }
-
-// client.post('statuses/update', {status},  function(error, tweet, response) {
-//     if(error) console.log(error);
-//     else{
-//         //console.log(tweet);  // Tweet body.
-//         //console.log(response);  // Raw response object.
-//         console.log("Tweet successful.")
-//     }
-// });
