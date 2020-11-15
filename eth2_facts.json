@@ -52,7 +52,7 @@
     {
         "date":"11/15",
         "morning":false,
-        "fact":"To trigger genesis, there must be at least 16384 32-ETH validator deposits.\n\nThis is an important distinction from the 524,288 ETH threshold (16,384 * 32) that is commonly discussed. It is possible to have more than 524,288 ETH in the deposit contract and genesis still not triggered."
+        "fact":"Check out @phil_eth's recent thread for an excellent guide on security best-practices to follow while preparing to send your Eth2 deposit. 👇\n\nhttps://twitter.com/phil_eth/status/1327826218180354050?s=20"
     },
     {
         "date":"11/16",
