@@ -57,7 +57,7 @@
     {
         "date":"11/16",
         "morning":true,
-        "fact":"To trigger genesis, there must 16384 validator deposits of 32 ETH.\n\nThis is a distinction from the commonly asserted 524,288 ETH (16,384 * 32) threshold. It's technically possible to have > 524,288 ETH deposited and still meet genesis conditions."
+        "fact":"When generating your Eth2 keys via the deposit CLI, you can use an existing mnemonic that you might have (eg. from a Ledger). When choosing an index, start from 0 and avoid adding subsequent deposits to an existing index.\n\n--@dv8S6660"
     },
     {
         "date":"11/16",
