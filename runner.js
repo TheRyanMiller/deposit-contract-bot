@@ -28,8 +28,8 @@ let client2 = new Twitter({
 console.log("Starting bot...\n\n");
 
 let cronValue = "0 8,20 * * *";
-let isProd = true;
-let sendOn = true;
+let isProd = false;
+let sendOn = false;
 let mainAccount = process.env.TEST_ACCT;
 if(isProd) mainAccount = process.env.PROD_ACCT;
 
@@ -38,7 +38,6 @@ let replyAccount = process.env.REPLY_ACCT;
 let run = () => {
     let d = moment().subtract({hours:20});
     database.values.findOne({created_at: {$lt: d}}).sort({created_at:-1}).then(dbResult=>{
-        console.log("~~~~~~\n"+dbResult+"\n~~~~~~~")
         buildTweet().then(result=>{
             
             if(isProd){

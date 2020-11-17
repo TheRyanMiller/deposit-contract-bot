@@ -62,12 +62,12 @@
     {
         "date":"11/16",
         "morning":false,
-        "fact":"To trigger genesis, there must 16384 validator deposits of 32 ETH.\n\nThis is a distinction from the commonly asserted 524,288 ETH (16,384 * 32) threshold. It's technically possible to have > 524,288 ETH deposited and still meet genesis conditions."
+        "fact":"The r/EthStaker community has put together a great calendar of events which includes resources like AMAs and staking workshops. 👇\n\nhttps://www.reddit.com/r/ethstaker/comments/jkmh7d/ethstaker_calendar_sticky_updated_at_least_weekly/"
     },
     {
         "date":"11/17",
         "morning":true,
-        "fact":"As we prepare to stake on mainnet, expect that the final versions of beacon chain software (all clients) likely won't be ready until after Nov. 24.\nIn meantime, sync geth, secure your system, but wait to install the client. \n\n-- @superphiz"
+        "fact":"The r/EthStaker community has put together a great calendar of events which includes resources like AMAs and staking workshops. 👇\n\nhttps://www.reddit.com/r/ethstaker/comments/jkmh7d/ethstaker_calendar_sticky_updated_at_least_weekly/"
     },
     {
         "date":"11/17",
@@ -77,17 +77,17 @@
     {
         "date":"11/18",
         "morning":true,
-        "fact":""
+        "fact":"When staking, be familiar with the types of keys you'll need. The official CLI will give you 3 things:\n\n1 keystore file per validator (password protects your key)\n1 mnemonic to restore your validator and withdraw key\n1 deposit file which helps generate your deposit txn."
     },
     {
         "date":"11/18",
         "morning":false,
-        "fact":""
+        "fact":"The official Validator Launchpad CLI will output 3 important things:\n\n1 mnemonic to restore your validator key(s) + withdraw key\n1 keystore file per validator (password protects your key)\n1 deposit file which helps generate your deposit txn(s)."
     },
     {
         "date":"11/19",
         "morning":true,
-        "fact":""
+        "fact":"To trigger genesis, there must 16384 validator deposits of 32 ETH.\n\nThis is a distinction from the commonly asserted 524,288 ETH (16,384 * 32) threshold. It's technically possible to have > 524,288 ETH deposited without meeting genesis conditions."
     },
     {
         "date":"11/19",
