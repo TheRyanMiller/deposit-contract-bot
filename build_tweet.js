@@ -71,7 +71,7 @@ module.exports = () => new Promise ((resolve, reject) => {
 
 
     axios.get(url).then(resp => {
-        balance = (Number(web3.utils.fromWei(resp.data.result)) - 5).toFixed(0);
+        balance = (Number(web3.utils.fromWei(resp.data.result))).toFixed(0);
         numValidators = (balance / 32).toFixed(0);
         percent = (balance/minEthNeeded*100).toFixed(1);
         requiredEth = minEthNeeded - balance;

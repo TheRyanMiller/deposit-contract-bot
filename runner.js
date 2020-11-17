@@ -28,8 +28,8 @@ let client2 = new Twitter({
 console.log("Starting bot...\n\n");
 
 let cronValue = "0 8,20 * * *";
-let isProd = false;
-let sendOn = false;
+let isProd = true;
+let sendOn = true;
 let mainAccount = process.env.TEST_ACCT;
 if(isProd) mainAccount = process.env.PROD_ACCT;
 
