@@ -27,7 +27,7 @@ let client2 = new Twitter({
 
 console.log("Starting bot...\n\n");
 
-let cronValue = "0 8,20 * * *";
+let cronValue = "5 0,6,12,18 * * *";
 let isProd = process.env.IS_PROD === "true" ? true : false;
 let sendOn = process.env.SEND_ON === "true" ? true : false;;
 let mainAccount = process.env.TEST_ACCT;
@@ -75,26 +75,26 @@ let run = () => {
                         //console.log(tweet);  // Tweet body.
                         //console.log(response);  // Raw response object.
                         console.log("Tweet 1 successful.");
-                        client2.post('statuses/update', {
-                            status:mainAccount+" "+differencesTweet,
-                            in_reply_to_status_id: ""+tweet.id_str
-                        },function(error, tweet2, response) {
-                            if(error) console.log(error);
-                            else{
-                                console.log("Tweet 2 successful.");
-                                if(factsTweet!=""){
-                                    client2.post('statuses/update', {
-                                        status:replyAccount+" "+factsTweet,
-                                        in_reply_to_status_id: ""+tweet2.id_str
-                                    },function(error, tweet, response) {
-                                        if(error) console.log(error);
-                                        else{                                  
-                                            console.log("Tweet 3 successful.");
-                                        }
-                                    })
-                                }
-                            }
-                        })
+                        // client2.post('statuses/update', {
+                        //     status:mainAccount+" "+differencesTweet,
+                        //     in_reply_to_status_id: ""+tweet.id_str
+                        // },function(error, tweet2, response) {
+                        //     if(error) console.log(error);
+                        //     else{
+                        //         console.log("Tweet 2 successful.");
+                        //         if(factsTweet!=""){
+                        //             client2.post('statuses/update', {
+                        //                 status:replyAccount+" "+factsTweet,
+                        //                 in_reply_to_status_id: ""+tweet2.id_str
+                        //             },function(error, tweet, response) {
+                        //                 if(error) console.log(error);
+                        //                 else{                                  
+                        //                     console.log("Tweet 3 successful.");
+                        //                 }
+                        //             })
+                        //         }
+                        //     }
+                        // })
                     }
                 });
             }
