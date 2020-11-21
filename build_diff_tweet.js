@@ -57,7 +57,7 @@ function repeat(s, i) {
 
 const buildTimeMeter = () => {
     let contractDeployDate = moment('2020-11-04' + 'T' + '15:15:20' + 'Z').utc();
-    let eth2LaunchDate = moment('2020-11-24' + 'T' + '23:59:59' + 'Z').utc();
+    let eth2LaunchDate = moment('2020-11-24' + 'T' + '12:00:00' + 'Z').utc();
     let totalMinutes = eth2LaunchDate.diff(contractDeployDate,'minutes');
     let minutesUntilLaunch = eth2LaunchDate.diff(moment().utc(),'minutes');
     let minutesElapsed = totalMinutes-minutesUntilLaunch;
