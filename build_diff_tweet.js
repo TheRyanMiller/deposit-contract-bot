@@ -70,14 +70,14 @@ module.exports = (result,dbResult) => {
     let differencesTweet = "";
     let percentGain = (result.percent - dbResult.percent).toFixed(1);
     let stakeGain = commaNumber((result.balance - dbResult.balance).toFixed(0));
-    differencesTweet=commaNumber(stakeGain)+" ETH staked in past 24 hours.\n\n";
-    differencesTweet+=percentGain+"% gain toward genesis in past 24 hours.\n\n";
+    differencesTweet=commaNumber(stakeGain)+" ETH staked in past 12 hours.\n\n";
+    differencesTweet+=percentGain+"% gain toward genesis in past 12 hours.\n\n";
     if(dbResult.trend>result.trend){
         console.log("NEGATIVE TREND!!!!");
     }
     if(dbResult.trend<result.trend) console.log("POSITIVE TREND!!!!")
     
     differencesTweet+="Time elapsed from first deposit until minimum genesis target: \n"+buildTimeMeter();
-    differencesTweet+="\n\n"+commaNumber(result.trend)+" ETH daily trend is needed to hit genesis target.";
+    //differencesTweet+="\n\n"+commaNumber(result.trend)+" ETH daily trend is needed to hit genesis target.";
     return differencesTweet;
 }

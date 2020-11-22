@@ -16,8 +16,8 @@ module.exports = () => new Promise ((resolve, reject) => {
     let max_size = 20;
     let statusBar = "";
     let today = moment();
-    let targetDate = moment("2020-11-25");
-    let daysUntilTarget = targetDate.diff(today, 'days');
+    let targetDate = moment('2020-11-24' + 'T' + '12:00:00' + 'Z').utc();
+    let minutesUntilTarget = targetDate.diff(today, 'minutes');
 
 
     var bar_styles = [
@@ -76,7 +76,7 @@ module.exports = () => new Promise ((resolve, reject) => {
         percent = (balance/minEthNeeded*100).toFixed(1);
         requiredEth = minEthNeeded - balance;
         statusBar=make_bar(percent, bar_styles[8], min_size, max_size).str + " " + percent +"%";
-        let trend = (requiredEth/daysUntilTarget).toFixed(0);
+        let trend = (requiredEth/minutesUntilTarget).toFixed(0);
         status = commaNumber(balance)+" ETH has been staked in the Eth2 deposit contract. \n \n"+commaNumber(requiredEth)+" more ETH is needed to launch Eth2.\n\n"+statusBar; 
         payload = {status, balance, percent, requiredEth, trend};
         resolve(payload);
