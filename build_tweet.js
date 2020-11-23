@@ -80,8 +80,9 @@ module.exports = () => new Promise ((resolve, reject) => {
         let eth2LaunchDate = moment('2020-11-24' + 'T' + '12:00:00' + 'Z').utc();
         let minutesUntilLaunch = eth2LaunchDate.diff(moment().utc(),'minutes');
         let hoursUntilLaunch = ((minutesUntilLaunch+1)/60).toFixed(0);
-        status = commaNumber(balance)+" ETH has been staked in the Eth2 deposit contract. \n \n"+commaNumber(requiredEth)+" more ETH is needed to launch Eth2.\n\n"+statusBar; 
-        status += "\n\n"+hoursUntilLaunch+" hours until minimum genesis target."
+        status = commaNumber(balance)+" ETH has been staked in the Eth2 deposit contract. \n \n"+commaNumber(requiredEth)+" more ETH is needed to launch Eth2.\n\n"; 
+        status += hoursUntilLaunch+" hours until minimum genesis target.\n\n";
+        status += statusBar;
         payload = {status, balance, percent, requiredEth, trend};
         resolve(payload);
     })

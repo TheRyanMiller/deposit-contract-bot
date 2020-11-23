@@ -5,8 +5,8 @@ const moment = require('moment');
 
 require('dotenv').config();
 
-let min_size = 20; //Must be > 0
-let max_size = 20;
+let min_size = 18; //Must be > 0
+let max_size = 18;
 
 var bar_styles = [
     '▁▂▃▄▅▆▇█',
@@ -72,8 +72,10 @@ module.exports = (result,dbResult) => {
     let stakeGain = commaNumber((result.balance - dbResult.balance).toFixed(0));
     let eth2LaunchDate = moment('2020-11-24' + 'T' + '12:00:00' + 'Z').utc();
     let minutesUntilLaunch = eth2LaunchDate.diff(moment().utc(),'minutes');
-    differencesTweet=commaNumber(stakeGain)+" ETH staked in past hour.\n\n";
-    differencesTweet+=percentGain+"% gain toward genesis in past hour.\n\n";    
+    let hoursUntilLaunch = ((minutesUntilLaunch+1)/60).toFixed(0);
+    let rateNeeded = commaNumber((result.balance/hoursUntilLaunch).toFixed(0));
+    differencesTweet+=rateNeeded+" ETH rate needed per hour.\n\n"
+    differencesTweet+=commaNumber(stakeGain)+" ETH staked in past hour.\n\n";
     differencesTweet+="Time elapsed from first deposit until minimum genesis target: \n"+buildTimeMeter();
     //differencesTweet+="\n\n"+commaNumber(result.trend)+" ETH daily trend is needed to hit genesis target.";
     return differencesTweet;

@@ -39,64 +39,65 @@ let run = () => {
     let d = moment().subtract({minutes:31});
     database.values.findOne({created_at: {$lt: d}}).sort({created_at:-1}).then(dbResult=>{
         buildTweet().then(result=>{
-            
-            if(isProd){
-                // Save new result
-                let newValues = new database.values({
-                    percent: result.percent.replace(/,/g, ""),
-                    balance: result.balance.replace(/,/g, ""),
-                    trend: result.trend,
-                    created_at: new Date()
-                });
-                newValues.save( err => { if(err) throw err } )
-            }
+            if(result.balance < 524288){
+                if(isProd){
+                    // Save new result
+                    let newValues = new database.values({
+                        percent: result.percent.replace(/,/g, ""),
+                        balance: result.balance.replace(/,/g, ""),
+                        trend: result.trend,
+                        created_at: new Date()
+                    });
+                    newValues.save( err => { if(err) throw err } )
+                }
 
-            // Main Tweet
-            console.log("\n-----MAIN TWEET----")
-            console.log(result.status+"\n")
-            console.log("\n->Character count: "+ lc.count(result.status, '-c').chars);
+                // Main Tweet
+                console.log("\n-----MAIN TWEET----")
+                console.log(result.status+"\n")
+                console.log("\n->Character count: "+ lc.count(result.status, '-c').chars);
 
-            // Prepare differences tweet
-            console.log("\n-----PREPARE DIFFERENCES TWEET----")
-            let differencesTweet = buildDiffTweet(result,dbResult);
-            console.log(differencesTweet);
-            console.log("\n->Character count: "+ lc.count(differencesTweet, '-c').chars);
-            
-            // Prepare Facts Tweet
-            console.log("\n-----FACTS TWEET----")
-            let factsTweet = tweet_fact();
-            console.log(factsTweet)
-            console.log("\n->Character count: "+ lc.count(factsTweet, '-c').chars);
+                // Prepare differences tweet
+                console.log("\n-----PREPARE DIFFERENCES TWEET----")
+                let differencesTweet = buildDiffTweet(result,dbResult);
+                console.log(differencesTweet);
+                console.log("\n->Character count: "+ lc.count(differencesTweet, '-c').chars);
+                
+                // Prepare Facts Tweet
+                console.log("\n-----FACTS TWEET----")
+                let factsTweet = tweet_fact();
+                console.log(factsTweet)
+                console.log("\n->Character count: "+ lc.count(factsTweet, '-c').chars);
 
-            if(sendOn){
-                client.post('statuses/update', {status:result.status},  function(error, tweet, response) {
-                    if(error) console.log(error.response);
-                    else{
-                        //console.log(tweet);  // Tweet body.
-                        //console.log(response);  // Raw response object.
-                        console.log("Tweet 1 successful.");
-                        client2.post('statuses/update', {
-                            status:mainAccount+" "+differencesTweet,
-                            in_reply_to_status_id: ""+tweet.id_str
-                        },function(error, tweet2, response) {
-                            if(error) console.log(error);
-                            else{
-                                console.log("Tweet 2 successful.");
-                                if(factsTweet!=""){
-                                    // client2.post('statuses/update', {
-                                    //     status:replyAccount+" "+factsTweet,
-                                    //     in_reply_to_status_id: ""+tweet2.id_str
-                                    // },function(error, tweet, response) {
-                                    //     if(error) console.log(error);
-                                    //     else{                                  
-                                    //         console.log("Tweet 3 successful.");
-                                    //     }
-                                    // })
+                if(sendOn){
+                    client.post('statuses/update', {status:result.status},  function(error, tweet, response) {
+                        if(error) console.log(error.response);
+                        else{
+                            //console.log(tweet);  // Tweet body.
+                            //console.log(response);  // Raw response object.
+                            console.log("Tweet 1 successful.");
+                            client2.post('statuses/update', {
+                                status:mainAccount+" "+differencesTweet,
+                                in_reply_to_status_id: ""+tweet.id_str
+                            },function(error, tweet2, response) {
+                                if(error) console.log(error);
+                                else{
+                                    console.log("Tweet 2 successful.");
+                                    if(factsTweet!=""){
+                                        // client2.post('statuses/update', {
+                                        //     status:replyAccount+" "+factsTweet,
+                                        //     in_reply_to_status_id: ""+tweet2.id_str
+                                        // },function(error, tweet, response) {
+                                        //     if(error) console.log(error);
+                                        //     else{                                  
+                                        //         console.log("Tweet 3 successful.");
+                                        //     }
+                                        // })
+                                    }
                                 }
-                            }
-                        })
-                    }
-                });
+                            })
+                        }
+                    });
+                }
             }
         })
     })
