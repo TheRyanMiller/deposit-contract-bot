@@ -27,7 +27,7 @@ let client2 = new Twitter({
 
 console.log("Starting bot...\n\n");
 
-let cronValue = "0 1,4,7,10,13,16,19,22 * * *";
+let cronValue = "0 * * * *";
 let isProd = process.env.IS_PROD === "true" ? true : false;
 let sendOn = process.env.SEND_ON === "true" ? true : false;;
 let mainAccount = process.env.TEST_ACCT;
