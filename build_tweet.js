@@ -12,8 +12,8 @@ module.exports = () => new Promise ((resolve, reject) => {
     let numValidators = 0;
     let minEthNeeded = 524288;
     let requiredEth = 0;
-    let min_size = 20; //Must be > 0
-    let max_size = 20;
+    let min_size = 18; //Must be > 0
+    let max_size = 18;
     let statusBar = "";
     let today = moment();
     let targetDate = moment('2020-11-24' + 'T' + '12:00:00' + 'Z').utc();
@@ -77,7 +77,11 @@ module.exports = () => new Promise ((resolve, reject) => {
         requiredEth = minEthNeeded - balance;
         statusBar=make_bar(percent, bar_styles[8], min_size, max_size).str + " " + percent +"%";
         let trend = (requiredEth/minutesUntilTarget).toFixed(0);
+        let eth2LaunchDate = moment('2020-11-24' + 'T' + '12:00:00' + 'Z').utc();
+        let minutesUntilLaunch = eth2LaunchDate.diff(moment().utc(),'minutes');
+        let hoursUntilLaunch = ((minutesUntilLaunch+1)/60).toFixed(0);
         status = commaNumber(balance)+" ETH has been staked in the Eth2 deposit contract. \n \n"+commaNumber(requiredEth)+" more ETH is needed to launch Eth2.\n\n"+statusBar; 
+        status += "\n\n"+hoursUntilLaunch+" hours until minimum genesis target."
         payload = {status, balance, percent, requiredEth, trend};
         resolve(payload);
     })
