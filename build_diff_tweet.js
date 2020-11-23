@@ -73,8 +73,7 @@ module.exports = (result,dbResult) => {
     let eth2LaunchDate = moment('2020-11-24' + 'T' + '12:00:00' + 'Z').utc();
     let minutesUntilLaunch = eth2LaunchDate.diff(moment().utc(),'minutes');
     differencesTweet=commaNumber(stakeGain)+" ETH staked in past hour.\n\n";
-    differencesTweet+=percentGain+"% gain toward genesis in past hour.\n\n";
-    differencesTweet+=((minutesUntilLaunch+1)/60)-((minutesUntilLaunch+1)%60)+" hours until minimum genesis.\n\n"    
+    differencesTweet+=percentGain+"% gain toward genesis in past hour.\n\n";    
     differencesTweet+="Time elapsed from first deposit until minimum genesis target: \n"+buildTimeMeter();
     //differencesTweet+="\n\n"+commaNumber(result.trend)+" ETH daily trend is needed to hit genesis target.";
     return differencesTweet;
